@@ -64,19 +64,19 @@ CUDA, use the full
 git clone git@github.com:arvidl/high-precision-glioma-segmentation.git
 cd high-precision-glioma-segmentation
 
-# uv path (preferred on macOS and Ubuntu)
+# Preferred on macOS and Ubuntu. Run these make targets; there is no uv path command.
 conda deactivate     # leave (base)
 make install         # uv sync --extra dev + pre-commit install
 make test            # smoke tests
 make help            # browse all targets
 
-# conda fallback
+# Alternative when uv is not available
 conda env create -f environment.yml
 conda activate hpgs
 pytest -q
 ```
 
-If you go for the `uv` path, you don't need to "activate" anything for daily work — the Makefile and `uv run` always reach
+With the make targets above, you don't need to activate anything for daily work. The Makefile and `uv run` always reach
 into `./.venv` automatically. `make install` syncs the `dev` extra as well, so it installs
 `pytest`, `ruff`, `pre-commit`, `jupyterlab`, and the rest of the development toolchain before
 installing the git hooks.

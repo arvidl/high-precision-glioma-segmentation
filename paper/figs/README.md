@@ -9,9 +9,10 @@ These are mirrored from `../../outputs/figures/` and `../../outputs/tables/`
 hand-edited; rebuilding the relevant Make target + running `make sync`
 (or `make paper`) regenerates the mirrored asset.
 
-The producer chain end-to-end is `make all` (top-level): `figures` (run
-all per-figure / per-table targets) -> `sync` (mirror into this folder)
--> `paper` (LaTeX build).
+The producer chain for computed artefacts is `make figures` (the targets in
+`FIGURE_TARGETS`) -> `make sync` -> `make paper`. Static Freeview panels and
+third-party illustrations in this folder have no producer target. `make paper`
+alone rebuilds `paper/main.pdf` from the files already here.
 
 ## Inventory: manuscript figure/table -> producer
 

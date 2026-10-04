@@ -27,8 +27,8 @@ authors:
     orcid: "https://orcid.org/0000-0001-8663-4247"
 repository-code: "https://github.com/arvidl/high-precision-glioma-segmentation"
 license: MIT
-version: "0.1.0"
-date-released: "2026-04-15"
+version: "1.0.0"
+date-released: "2026-10-04"
 keywords:
   - glioma
   - glioblastoma

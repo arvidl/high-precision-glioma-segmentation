@@ -36,21 +36,12 @@ uv run python -V
 
 ### Lockfile strategy
 
-`pyproject.toml` is the human-maintained dependency contract. A committed
-`uv.lock` should become the machine-resolved contract after the CUDA and MPS
-installations have both been validated. Until then, avoid hand-pinning every
-transitive dependency in `pyproject.toml`; prefer a small number of explicit
-constraints for packages with hardware-sensitive wheels, especially PyTorch.
-
-Recommended sequence after a successful Ubuntu CUDA and macOS MPS validation:
-
-```bash
-uv lock
-git status --short pyproject.toml uv.lock
-```
-
-Review the lockfile on both platforms before treating it as the paper-revision
-reproduction lock.
+`pyproject.toml` is the human-maintained dependency contract. `uv.lock` is
+the resolved contract for CPython 3.11, generated on Apple Silicon with
+`make install` and checked with `make test` for release `v1.0.0`. `uv lock`
+records platform markers, so the same file is what Linux CI installs.
+`make install` selects CPython 3.11. On this Mac, SciPy 1.15 does not load;
+the lock resolves SciPy 1.16 or newer.
 
 If you deliberately choose conda, use one environment for the entire session and
 override the Makefile launchers:
@@ -262,8 +253,15 @@ make test
 
 ### UCSF-PDGM v5
 
-Download UCSF-PDGM v5 from TCIA and point the extractor at the directory that
-contains `UCSF-PDGM-XXXX_nifti/` folders:
+Download **UCSF-PDGM** version 5 from
+<https://www.cancerimagingarchive.net/collection/ucsf-pdgm/>
+(DOI <https://doi.org/10.7937/tcia.bdgf-8v37>). Sign in, accept the Data
+Usage Agreement, and use the collection Download button or the NBIA Data
+Retriever. Unpack the archive until the parent directory contains one
+`UCSF-PDGM-XXXX_nifti/` folder per exam. In the version-5 package that
+parent is named `UCSF-PDGM-v5`. Full notes are in `data/README.md`.
+
+Point the extractor at that directory:
 
 ```bash
 uv run python scripts/extract_ucsfpdgm.py \
@@ -415,16 +413,17 @@ make parcellate-lumiere-p048 LUMIERE_PARCELLATE_BACKEND=dummy
 
 ### 6. Paper rebuild
 
+`make paper` builds `paper/main.pdf` from the sources already in `paper/`,
+including the committed figures. After `make figures` has written new
+artefacts under `outputs/`:
+
 ```bash
 make sync
 make paper
 ```
 
-For a full rebuild from generated outputs:
-
-```bash
-make all
-```
+`make all` runs `make figures`, `make sync`, and `make paper`. It needs the
+staged exams and pipeline derivatives.
 
 ## Conda fallback
 

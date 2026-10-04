@@ -1,7 +1,7 @@
 # Data
 
 **No binary data is committed to this repository.** This file documents how to
-obtain and stage the datasets used in the JMET revision.
+obtain and stage the datasets used in the article.
 
 ## Datasets
 
@@ -13,7 +13,18 @@ obtain and stage the datasets used in the JMET revision.
 - License: Data Usage Agreement on TCIA — confirm before any redistribution.
 - The released NIfTI files are already skull-stripped and intra-subject coregistered/resampled to the 3D T2/FLAIR space at 1 mm isotropic resolution, so the primary HPGS workflow uses them as provided and limits preprocessing to visual alignment QC.
 
-After downloading, point the extractor at the root that contains the
+### Download
+
+1. Open the TCIA collection page:
+   <https://www.cancerimagingarchive.net/collection/ucsf-pdgm/>.
+2. Sign in to TCIA and accept the Data Usage Agreement when prompted.
+3. Download **version 5** (May 2025) with the collection Download button or
+   the NBIA Data Retriever. The package is about 142 GB.
+4. Unpack it until you can see one directory per exam, named
+   `UCSF-PDGM-XXXX_nifti`. In the version-5 package that parent directory is
+   `UCSF-PDGM-v5`. Pass that parent directory as `--src`.
+
+Point the extractor at the root that contains the
 `UCSF-PDGM-XXXX_nifti/` directories:
 
 ```bash

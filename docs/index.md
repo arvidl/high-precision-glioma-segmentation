@@ -12,7 +12,7 @@ This is the documentation home for `high-precision-glioma-segmentation`. Build w
 - [**Build system — `make` targets**](build.md)
 - [Cohort definition](../configs/cohort_ucsfpdgm_n50.yaml)
 - [Pipeline configuration](../configs/default.yaml)
-- [Paper subfolder & TeXShop / track-changes conventions](../paper/README.md)
+- [Paper subfolder and how to build main.tex](../paper/README.md)
 - [Agent / AI rules](../AGENTS.md)
 
 ### Design notes

@@ -107,43 +107,51 @@ make smoke-segment SMOKE_DEVICE=mps
 make smoke-segment SMOKE_DEVICE=cuda
 ```
 
+## Code release
+
+This repository is the code release for the article, at tag `v1.0.0`:
+<https://github.com/arvidl/high-precision-glioma-segmentation>.
+The journal PDF in `article/` is the version of record. `paper/main.pdf` is
+the author manuscript built from `paper/main.tex`.
+
 ## Reproducing the article
 
-A fresh clone does not include the MRI exams. UCSF-PDGM v5 comes from TCIA and
-LUMIERE from its public archive. FreeSurfer 8.2.0 is an external install.
-The files in `paper/figs/` are the figures used by the manuscript. Regenerating
-the full n=50 cohort, including the Appendix 5 TumorSynth comparison, needs
-those exams and the cohort derivatives; see
-[`docs/tumorsynth_appendix5_reproducibility.md`](docs/tumorsynth_appendix5_reproducibility.md).
-`make test` checks that the metric builders agree with the committed tables.
+A fresh clone does not include the MRI exams. The commands below run without
+them. Staging UCSF-PDGM v5 and LUMIERE, then regenerating figures, is the
+following section.
 
-1. Obtain UCSF-PDGM v5 from TCIA and extract to `/path/to/UCSF-PDGM-v5`.
-2. Extract the leak-safe, clinically stratified 50-subject cohort:
-   ```bash
-   uv run python scripts/extract_ucsfpdgm.py \
-       --src /path/to/UCSF-PDGM-v5 \
-       --dst ./data/ucsf_pdgm_cohort50
-   ```
-3. Run the pipeline for a single subject:
-   ```bash
-   uv run python scripts/run_subject.py --subject 0005 \
-       --config configs/default.yaml
-   ```
-4. Batch everything:
-   ```bash
-   uv run python scripts/run_cohort.py --config configs/default.yaml
-   ```
-5. Compute quantitative metrics (Dice, HD95, VE, Sens/Spec) and regenerate tables:
-   ```bash
-   uv run python scripts/compute_metrics.py
-   ```
-6. Regenerate paper figures, sync them, and rebuild the manuscript PDF:
-   ```bash
-   make figures   # execute notebooks/99_reproduce_paper_figures.ipynb
-   make sync      # copy outputs/figures -> paper/figs
-   make paper     # build paper/main.pdf from paper/main.tex
-   # or simply: make all
-   ```
+```bash
+make install          # uv sync --extra dev, from the committed uv.lock
+make test             # metric and unit tests; no images required
+make paper            # build paper/main.pdf from the committed sources
+```
+
+`make paper` uses the figures already in `paper/figs/`. `make test` checks
+that the metric builders agree with the committed tables.
+
+### Regenerating figures and tables
+
+UCSF-PDGM v5 is the TCIA collection **UCSF-PDGM** (DOI
+[10.7937/tcia.bdgf-8v37](https://doi.org/10.7937/tcia.bdgf-8v37)). Download
+steps, the `UCSF-PDGM-XXXX_nifti/` folder the extractor expects, and the
+LUMIERE Patient-048 layout are in [`data/README.md`](data/README.md). The
+full runbook is
+[`docs/software_installation.md`](docs/software_installation.md).
+Appendix 5 also needs the separate TumorSynth environment in
+[`docs/tumorsynth_appendix5_reproducibility.md`](docs/tumorsynth_appendix5_reproducibility.md).
+
+After the cohort is extracted and the pipeline derivatives are on disk:
+
+```bash
+make figures   # computed tables and figures; see Makefile FIGURE_TARGETS
+make sync      # copy outputs/figures and outputs/tables -> paper/figs
+make paper     # rebuild paper/main.pdf
+# or: make all
+```
+
+`make figures` does not redraw the static Freeview panels or the third-party
+illustrations already stored in `paper/figs/`. The mapping from each
+manuscript figure to its producer is [`paper/figs/README.md`](paper/figs/README.md).
 
    To regenerate manuscript Figure 2 end-to-end for the five legacy
    UCSF-PDGM subjects (0020, 0022, 0039, 0066, 0085) — using FS 8.2.0

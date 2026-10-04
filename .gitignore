@@ -17,7 +17,6 @@ MANIFEST
 venv/
 env/
 .python-version
-uv.lock
 
 # Jupyter
 .ipynb_checkpoints/

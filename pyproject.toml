@@ -1,9 +1,9 @@
 [project]
 name = "hpgs"
-version = "0.1.0"
+version = "1.0.0"
 description = "High-precision glioma segmentation — multiparametric MRI + SynthSeg + fastMONAI + nnU-Net v2"
 readme = "README.md"
-requires-python = ">=3.11,<3.13"
+requires-python = ">=3.11,<3.12"
 license = { text = "MIT" }
 authors = [
     { name = "Alexander Selvikvåg Lundervold", email = "alexander.lundervold@hvl.no" },
@@ -20,7 +20,7 @@ classifiers = [
 
 dependencies = [
     "numpy>=1.26,<2.3",
-    "scipy>=1.11",
+    "scipy>=1.16",
     "pandas>=2.1",
     "pyyaml>=6.0",
     "nibabel>=5.2",

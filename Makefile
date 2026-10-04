@@ -2,17 +2,15 @@
 # Orchestrates code → figures → paper.
 
 PY        ?= uv run python
-JUPYTER   ?= uv run jupyter
 PYTEST    ?= uv run pytest
 RUFF      ?= uv run ruff
 
-NOTEBOOKS := notebooks/00_quickstart_single_subject.ipynb \
-             notebooks/10_cohort_preprocessing.ipynb \
-             notebooks/20_tumor_segmentation_fastMONAI.ipynb \
-             notebooks/30_benchmark_segmentglioma_vs_raidionics.ipynb \
-             notebooks/40_hitplot_generation.ipynb \
-             notebooks/50_quantitative_metrics.ipynb \
-             notebooks/99_reproduce_paper_figures.ipynb
+# Computed manuscript artefacts. Each prerequisite is an existing target.
+# Static Freeview and third-party panels in paper/figs/ have no producer here.
+FIGURE_TARGETS := cohort-metadata table2-dl-vs-gt bench-runtime \
+                  agreement-panel functional-anatomy-hitplot figs-anat-profile \
+                  figure6-lumiere-volumes figure11-lumiere-p048-hitplot \
+                  table-tumorsynth-agreement
 
 .PHONY: help install test lint format figures figure2-legacy5 figure2-render \
         cohort-metadata smoke-segment scope-pr7 parcellate-all segment-all \
@@ -37,7 +35,7 @@ help:
 	@echo "  test                run pytest"
 	@echo "  lint                ruff check"
 	@echo "  format              ruff format"
-	@echo "  figures             execute notebooks/99_reproduce_paper_figures.ipynb"
+	@echo "  figures             regenerate computed manuscript figures and tables (needs staged data; see docs/software_installation.md)"
 	@echo "  figure2-legacy5     regenerate FS 8.2.0 derivatives + Figure 2 panels a..h for all 5 legacy subjects"
 	@echo "  figure2-render      regenerate Figure 2 panels a..h only (skip FS clinical stage)"
 	@echo "  cohort-metadata     join cohort YAML + UCSF-PDGM metadata CSV -> Table 1"
@@ -64,15 +62,16 @@ help:
 	@echo "  parcellate-lumiere-p048  R3 Step G.2: real FreeSurfer 8.2.0 recon-all-clinical fan-out across all 6 LUMIERE Patient-048 timepoints; writes per-tp parcellation/{wmparc_native.nii.gz, wmparc_lut.json, wmparc.json} + parcellation_summary.{csv,json}. ~3-12 h CPU. Override LUMIERE_PARCELLATE_BACKEND=dummy for the network-free smoke."
 	@echo "  hitplot-lumiere-p048  R3 Step G.3: per-tp Hit-Plot CSVs for LUMIERE Patient-048 (DL hard, DL probs, HD-GLIO, DeepBraTumIA) joining the FS wmparc with the four segmentation sources; writes per-tp hitplot/tp-<week>_hitplot_<source>.csv + hitplot_summary.{csv,json}. Requires Step G.2 outputs on disk (~2 min for the full 6 tp x 4 sources fan-out)."
 	@echo "  figure11-lumiere-p048-hitplot  R3 Step G.4a: build Figure 11 (longitudinal Hit-Plot heatmap, top-K wmparc regions x 6 tp, two-panel WT/ET) from the per-tp DL Hit-Plot CSVs; writes outputs/figures/fig11_lumiere_p048_hitplot.{pdf,png,json} (and `make sync` mirrors them into paper/figs/)."
-	@echo "  sync                copy outputs/figures -> paper/figs"
-	@echo "  paper               build paper/main.pdf from paper/main.tex"
+	@echo "  sync                copy outputs/figures and outputs/tables -> paper/figs"
+	@echo "  paper               build paper/main.pdf from the committed manuscript sources"
 	@echo "  docs                render docs/*.md design notes to docs/*.pdf via pandoc"
 	@echo "  all                 figures + sync + paper"
 	@echo "  clean               remove TeX build artefacts and outputs/"
 
 install:
-	uv sync --extra dev
-	uv run pre-commit install
+	uv python install 3.11
+	uv sync --python 3.11 --extra dev
+	uv run --python 3.11 pre-commit install
 
 test:
 	$(PYTEST) -q -m "not slow and not gpu"
@@ -85,9 +84,7 @@ format:
 	$(RUFF) format .
 	$(RUFF) check --fix .
 
-figures:
-	$(JUPYTER) nbconvert --to notebook --execute --inplace \
-	    notebooks/99_reproduce_paper_figures.ipynb
+figures: $(FIGURE_TARGETS)
 
 figure2-legacy5:
 	$(PY) scripts/run_figure2_legacy5.py \
@@ -618,7 +615,7 @@ figure11-lumiere-p048-hitplot:
 sync:
 	$(PY) scripts/sync_figs_to_paper.py
 
-paper: sync
+paper:
 	$(MAKE) -C paper paper
 
 PANDOC      ?= pandoc

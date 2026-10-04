@@ -4,7 +4,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## [Unreleased]
+## [1.0.0] - 2026-10-04
+
+### Added
+- Public code release `v1.0.0` for the 2026 Journal of Medical Engineering &
+  Technology article. This repository is that release.
+- Committed `uv.lock`, resolved on Apple Silicon with `uv sync --extra dev`
+  and checked with `make test`.
+- TCIA download steps for UCSF-PDGM version 5, including the
+  `UCSF-PDGM-XXXX_nifti/` directory the extractor expects.
+
+### Changed
+- `make figures` and `make all` call the existing figure and table targets.
+- `make paper` builds `paper/main.pdf` from the committed manuscript sources.
 
 ### Added
 - Initial public release of the code and manuscript sources for the 2026

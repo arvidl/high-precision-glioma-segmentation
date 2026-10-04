@@ -19,7 +19,7 @@ PDF to drift away from the code that produced them. Routing every build through
 a single, reproducible chain:
 
 ```
-code  →  notebooks  →  outputs/figures  →  paper/figs  →  paper/main.pdf
+code  →  scripts  →  outputs/figures  →  paper/figs  →  paper/main.pdf
 ```
 
 CI (`.github/workflows/ci.yml`) executes the same chain so any drift between
@@ -41,11 +41,11 @@ CI (`.github/workflows/ci.yml`) executes the same chain so any drift between
 | `make test` | `pytest -q -m "not slow and not gpu"` — runs the smoke tests. | Before every commit. |
 | `make lint` | `ruff check .` and `ruff format --check .` (read-only). | Before pushing; CI mirrors this. |
 | `make format` | `ruff format .` then `ruff check --fix .` (writes). | When the editor hasn't autoformatted. |
-| `make figures` | Executes `notebooks/99_reproduce_paper_figures.ipynb` in-place; outputs go to `outputs/figures/`. | After any pipeline change that affects a figure. |
-| `make sync` | Runs `scripts/sync_figs_to_paper.py` to mirror `outputs/figures/ → paper/figs/`. | Called automatically by `make paper`; rarely needed by hand. |
-| `make paper` | `make sync` + `make -C paper paper` → produces `paper/main.pdf` via `latexmk`. | Whenever you want a refreshed author-manuscript PDF from the command line. |
+| `make figures` | Runs the computed-figure targets listed in `FIGURE_TARGETS` (cohort table, Dice table, runtime table, agreement panel, anatomical-profile panels, LUMIERE figures, TumorSynth table). Needs staged exams and derivatives. | After pipeline outputs exist and a figure or table should be regenerated. |
+| `make sync` | Runs `scripts/sync_figs_to_paper.py` to mirror `outputs/figures/` and `outputs/tables/` into `paper/figs/`. | After `make figures`, before rebuilding the PDF from those new files. |
+| `make paper` | `make -C paper paper` → produces `paper/main.pdf` via `latexmk` from the committed manuscript sources. | Whenever you want the author-manuscript PDF. |
 | `make docs` | Renders `docs/*.md` design notes to matching `docs/*.pdf` via `pandoc --pdf-engine=xelatex`. | After editing a design note in `docs/`. |
-| `make all` | `figures` + `sync` + `paper` end-to-end. | The full reproducible build. |
+| `make all` | `figures`, then `sync`, then `paper`. | Full regeneration once cohort derivatives exist. |
 | `make clean` | Wipes `outputs/`, TeX build artefacts (`.aux`, `.log`, `.bbl`, …), and the lint caches. | When something looks stale or before tagging a release. |
 
 ## `paper/Makefile` targets
@@ -61,10 +61,8 @@ directly from `paper/` when iterating on LaTeX only:
 | `make clean` | `latexmk -c` — remove intermediate files but keep the PDF |
 | `make veryclean` | `latexmk -C` + remove `.bbl`, `.run.xml` — full reset |
 
-`paper/Makefile` exports `BIBINPUTS` and `BSTINPUTS` to point at `refs/`, which
-is why `latexmk` finds `TumorLocation-extended.bib`, `revision_additions.bib`,
-and the `.bst` styles even though they live in a subfolder. TeXShop has its own
-copy of those env vars set in `~/.zshrc` (see [`paper/README.md`](../paper/README.md)).
+`paper/Makefile` builds `main.pdf` from `main.tex`, `references.bib`, and
+`abbrv.bst` next to the source. `refs/` still holds extra BibTeX styles.
 
 ## Typical command-line sessions
 
@@ -81,8 +79,9 @@ make help              # browse remaining targets
 
 ```bash
 # edit src/hpgs/viz/hitplot.py …
-make figures           # re-execute the figure notebook
-make paper             # rebuild PDF (sync runs automatically)
+make figures           # regenerate computed figures and tables
+make sync              # copy outputs/ into paper/figs
+make paper             # rebuild paper/main.pdf
 open paper/main.pdf
 ```
 
@@ -115,7 +114,7 @@ git status             # check what changed
   use conda instead, keep one conda environment active for the whole session and
   override the launchers:
   ```bash
-  make figures PY=python JUPYTER=jupyter
+  make figures PY=python
   make test PYTEST=pytest
   make lint RUFF=ruff
   ```
@@ -148,9 +147,8 @@ git status             # check what changed
 `make paper` and TeXShop produce the **same PDF from the same sources** —
 they're two paths to the same destination, both using `pdflatex` + `bibtex`.
 Day-to-day workflow: write text in TeXShop (⌘T to typeset, SyncTeX to jump),
-and use `make paper` when you want to make sure the figures are freshly synced
-from `outputs/figures/` first, or when you're about to commit and want the
-build to match exactly what CI will produce.
+and use `make paper` to rebuild `paper/main.pdf` from the committed sources.
+Run `make sync` first when `outputs/figures/` has newer files than `paper/figs/`.
 
 ## What CI does
 

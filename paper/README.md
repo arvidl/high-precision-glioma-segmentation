@@ -11,6 +11,7 @@ The published journal PDF is
 ```
 paper/
 ├── main.tex          # author manuscript (no revision markup)
+├── main.pdf          # 49-page A4 build of main.tex
 ├── references.bib    # the 107 cited references
 ├── abbrv.bst
 ├── ORCID.png
@@ -23,7 +24,7 @@ paper/
 
 ## Build
 
-The typeset PDF is **not** tracked in git (see [What to commit](#what-to-commit-what-to-keep-out) below). After pulling, rebuild locally:
+`main.pdf` is tracked. Rebuild it locally after changing the source:
 
 ```bash
 cd paper && make paper
@@ -99,7 +100,7 @@ keeps working.
 
 ## What to commit, what to keep out
 
-- **Commit:** `main.tex`, `references.bib`, `.bst`, `Makefile`, `latexmkrc`, and the figures in `figs/` that `main.tex` includes.
-- **Don't commit:** build artefacts (`*.aux`, `*.log`, `*.out`, `*.bbl`, `*.blg`, `*.synctex.gz`) or `main.pdf`. Rebuild with `cd paper && make paper`.
+- **Commit:** `main.tex`, `references.bib`, `.bst`, `Makefile`, `latexmkrc`, `main.pdf`, and the figures in `figs/` that `main.tex` includes.
+- **Don't commit:** build artefacts (`*.aux`, `*.log`, `*.out`, `*.bbl`, `*.blg`, `*.synctex.gz`). Rebuild the PDF with `cd paper && make paper`.
 
 The repo `.gitignore` already covers these patterns.

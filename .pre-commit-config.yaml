@@ -7,7 +7,7 @@ repos:
       - id: check-yaml
       - id: check-added-large-files
         args: ['--maxkb=1024']
-        exclude: ^paper/High_precision_segmentation_in_glioma_2025_submitted\.pdf$
+        exclude: ^paper/(High_precision_segmentation_in_glioma_2025_submitted|main)\.pdf$
       - id: check-merge-conflict
       - id: mixed-line-ending
 

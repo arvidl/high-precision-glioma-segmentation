@@ -53,9 +53,9 @@
 - When adding a figure to the manuscript: (1) generate via code, (2) `make sync`,
   (3) `\includegraphics{figs/<name>}`, (4) update `paper/figs/README.md` inventory.
 - New references go in `paper/references.bib`.
-- Do not commit TeX build artefacts (`.aux`, `.log`, `.bbl`, etc.) or `paper/main.pdf`.
-  The published article PDF in `article/` is the version of record. `make paper`
-  rebuilds the author manuscript.
+- Do not commit TeX build artefacts (`.aux`, `.log`, `.bbl`, etc.).
+  `paper/main.pdf` is the tracked author-manuscript PDF. The published article
+  PDF in `article/` is the version of record. `make paper` rebuilds `paper/main.pdf`.
 
 ## LaTeX authoring conventions
 - **Local editor of record:** TeXShop (MacTeX) on macOS. Open `paper/main.tex`

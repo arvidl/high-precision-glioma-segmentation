@@ -106,7 +106,6 @@ paper/*.lot
 paper/*.nav
 paper/*.snm
 paper/*.vrb
-paper/main.pdf
 paper/response_to_reviewers.pdf
 paper/response_to_reviewer_1.pdf
 paper/response_to_reviewer_2.pdf

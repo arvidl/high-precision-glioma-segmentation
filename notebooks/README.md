@@ -3,11 +3,11 @@
 Each notebook is a thin shim over `src/hpgs`. Notebook outputs are stripped on
 commit (`nbstripout` pre-commit hook).
 
-The teaching notebook in this repository is
+The teaching notebook on the current `main` branch is
 [`00_quickstart_single_subject.ipynb`](00_quickstart_single_subject.ipynb):
 subject 0005, the four MRI channels, the MONAI BraTS segmenter, and Dice
-against the dataset reference. It needs the extracted cohort described in
-[`../data/README.md`](../data/README.md).
+against the dataset reference. It is not in tag `v1.0.0`. It needs the
+extracted cohort described in [`../data/README.md`](../data/README.md).
 
 | Notebook | In the repository | Purpose |
 |---|---|---|

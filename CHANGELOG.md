@@ -8,7 +8,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 - `notebooks/00_quickstart_single_subject.ipynb`: subject 0005, four MRI
-  channels, the MONAI BraTS segmenter, and enhancing-tumor Dice.
+  channels, the MONAI BraTS segmenter, and enhancing-tumor Dice. This
+  notebook is on `main` and is not part of tag `v1.0.0`.
+
+### Changed
+- Author manuscript: Saruar Alam's affiliation matches the published
+  article (MMIV and the IT division, University of Bergen). The
+  manuscript and `CITATION.cff` cite DOI 10.1080/03091902.2026.2713703.
+  The code-availability sentence states that the repository is the
+  public release.
+- `hpgs-run-cohort` runs the n=50 segmentation, parcellation, and
+  Hit-Plot scripts (`make segment-all`, `make parcellate-all`,
+  `make hitplot-all`).
+- Build docs describe CI as lint and smoke tests. CI does not rebuild
+  `paper/main.pdf`.
+- `paper/figs/README.md` lists the figures and tables in the current
+  manuscript.
 
 ## [1.0.0] - 2026-10-04
 

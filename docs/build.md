@@ -22,8 +22,9 @@ a single, reproducible chain:
 code  →  scripts  →  outputs/figures  →  paper/figs  →  paper/main.pdf
 ```
 
-CI (`.github/workflows/ci.yml`) executes the same chain so any drift between
-"works on my Mac" and "builds in CI" is caught early.
+CI (`.github/workflows/ci.yml`) runs lint and smoke tests on Ubuntu and
+macOS. It does not rebuild figures or `paper/main.pdf`. Build that PDF
+locally with `make paper`. See *What CI does* below.
 
 ## The two Makefiles
 

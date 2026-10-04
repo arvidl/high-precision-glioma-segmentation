@@ -1,10 +1,9 @@
 name: CI
 
-# Minimal continuous-integration for HPGS:
+# Continuous integration for HPGS:
 #   * Lint + smoke-test the Python codebase on Ubuntu and macOS-14.
-#   * The heavier `build-paper` job that docs/build.md mentions is intentionally
-#     deferred until PR-8 stabilises (LaTeX-in-CI is fragile and not yet on the
-#     reviewer-critical path). Track this in docs/build.md.
+#   * The manuscript PDF is built locally with `make paper`. This workflow
+#     does not run latexmk. See docs/build.md.
 #
 # Trigger: every push and PR to main.
 

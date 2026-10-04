@@ -65,7 +65,7 @@ export BIBINPUTS=".:./refs:"
 export BSTINPUTS=".:./refs:"
 ```
 
-### Alternative — `latexmk` from the shell (used by CI)
+### Alternative — `latexmk` from the shell
 
 ```bash
 make paper        # → main.pdf
@@ -77,14 +77,14 @@ Requires `latexmk` and a TeX distribution (TeX Live or MacTeX). On macOS:
 `brew install --cask mactex-no-gui` (≈4 GB) or `brew install basictex` for a
 smaller install — then `tlmgr install latexmk biber tcolorbox enumitem` etc.
 
-The CI `build-paper` job (`.github/workflows/ci.yml`) uses `latexmk` so the PDF
-is rebuilt on every PR regardless of which editor was used to author the source.
+GitHub Actions does not build this PDF. `.github/workflows/ci.yml` runs lint
+and smoke tests only. Rebuild the manuscript locally with `make paper`.
 
 ## Author manuscript and journal PDF
 
 `main.tex` is the corrected camera-ready author source: ordinary black text, the figures in `figs/`, and `references.bib` (107 cited works). `make paper` compiles it to `main.pdf`.
 
-[`../article/Lundervold_etal_High_Precision_Segmentation_of_Glioma_JMET_2026.pdf`](../article/Lundervold_etal_High_Precision_Segmentation_of_Glioma_JMET_2026.pdf) is the published journal article. Its page design is the publisher's, so it will not match `main.pdf` page for page.
+[`../article/Lundervold_etal_High_Precision_Segmentation_of_Glioma_JMET_2026.pdf`](../article/Lundervold_etal_High_Precision_Segmentation_of_Glioma_JMET_2026.pdf) is the published journal article (Journal of Medical Engineering & Technology, 14 August 2026, DOI [10.1080/03091902.2026.2713703](https://doi.org/10.1080/03091902.2026.2713703), CC BY 4.0). Its page design is the publisher's, so it will not match `main.pdf` page for page.
 
 ## Figure sync
 

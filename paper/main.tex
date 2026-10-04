@@ -42,11 +42,11 @@
 
 \newcommand{\orcidicon}{\includegraphics[scale=0.006]{ORCID.png}}
 
-\author{Arvid Lundervold $^{1,2 \, \href{https://orcid.org/0000-0002-0032-4182}{\orcidicon}}$, Saruar Alam$^{1,2 \, \href{https://orcid.org/0000-0002-3007-5180}{\orcidicon}}$, Marianne H. Hannisdal$^{1,4 \, \href{https://orcid.org/0000-0002-6333-007X}
-{\orcidicon}}$, Dorota Goplen$^{4 \, \href{https://orcid.org/0009-0009-9373-4110}{\orcidicon}}$ \\ Martha Chekenya$^{1 \, \href{https://orcid.org/0000-0001-7241-3451}{\orcidicon}}$, Alexander S. Lundervold$^{3,2 \, \href{https://orcid.org/0000-0001-8663-4247}
+\author{Arvid Lundervold $^{1,2 \, \href{https://orcid.org/0000-0002-0032-4182}{\orcidicon}}$, Saruar Alam$^{2,3 \, \href{https://orcid.org/0000-0002-3007-5180}{\orcidicon}}$, Marianne H. Hannisdal$^{1,5 \, \href{https://orcid.org/0000-0002-6333-007X}
+{\orcidicon}}$, Dorota Goplen$^{5 \, \href{https://orcid.org/0009-0009-9373-4110}{\orcidicon}}$ \\ Martha Chekenya$^{1 \, \href{https://orcid.org/0000-0001-7241-3451}{\orcidicon}}$, Alexander S. Lundervold$^{2,4 \, \href{https://orcid.org/0000-0001-8663-4247}
 {\orcidicon}}$}
 
-\date{\footnotesize $^1$Department of Biomedicine, University of Bergen, 5020 Bergen, Norway; $^2$Mohn Medical Imaging and Visualization (MMIV) Centre, Department of Radiology, Haukeland University Hospital, Bergen, Norway; $^3$Department Strategy and Management, NHH Norwegian School of Economics, Bergen,  Norway; $^4$Cancer Clinic, Haukeland University Hospital, Bergen, Norway
+\date{\footnotesize $^1$Department of Biomedicine, University of Bergen, 5020 Bergen, Norway; $^2$Mohn Medical Imaging and Visualization (MMIV) Centre, Department of Radiology, Haukeland University Hospital, Bergen, Norway; $^3$IT division, University of Bergen, Bergen, Norway; $^4$Department Strategy and Management, NHH Norwegian School of Economics, Bergen,  Norway; $^5$Cancer Clinic, Haukeland University Hospital, Bergen, Norway
 \\
 }
 
@@ -57,6 +57,7 @@
 
 \maketitle
 
+\noindent Published online in \emph{Journal of Medical Engineering \& Technology}, 14 August 2026. DOI: \url{https://doi.org/10.1080/03091902.2026.2713703} (CC BY 4.0).
 
 \begin{abstract}
 
@@ -203,8 +204,8 @@ adapter that decouples the choice of backbone from downstream
 Hit-Plot code. Dataset-provided masks are retained as a per-subject
 \emph{reference}, not as \emph{ground-truth}, and the agreement of
 Hit-Plot computed from the provided masks (Hit-Plot-GT) versus from
-the unified deep-learning masks (Hit-Plot-DL) is reported per cell 
-as a quantitative measure of the Hit-Plot's sensitivity to 
+the unified deep-learning masks (Hit-Plot-DL) is reported per cell
+as a quantitative measure of the Hit-Plot's sensitivity to
 segmentation variability.
 \textbf{(iii)~A reproducible n=50 evaluation infrastructure.}
 The leak-safe cohort (Table~\ref{table:ucsf-pdgm-cohort50}) and the
@@ -1159,7 +1160,7 @@ segmentation method
 The engine runs behind a thin Python adapter that decouples the choice of backbone from
 downstream Hit-Plot code.
 Per-subject Dice, Hausdorff-95, and volumetric error of the unified
-engine against the dataset-provided reference masks are reported in Table~\ref{table:dl-vs-gt}. Hit-Plot-GT versus Hit-Plot-DL agreement is reported per cell as a quantitative measure of the 
+engine against the dataset-provided reference masks are reported in Table~\ref{table:dl-vs-gt}. Hit-Plot-GT versus Hit-Plot-DL agreement is reported per cell as a quantitative measure of the
 Hit-Plot's sensitivity to segmentation variability. A head-to-head
 benchmark of the unified engine against \texttt{Raidionics} and
 \texttt{segment\_glioma} on the same $n=50$ cohort is methodologically
@@ -1176,7 +1177,7 @@ N4-corrected, skull-stripped, and affine-registered to SRI-24), whereas
 HPGS evaluates on the dataset-provided native co-registered UCSF-PDGM
 volumes without re-running that pipeline, so a same-cohort paired
 comparison would confound segmenter identity with preprocessing and
-operating-space differences rather than isolate backbone quality. We 
+operating-space differences rather than isolate backbone quality. We
 leave a methodology-matched comparison to future work. As an
 additional bounded sensitivity analysis, we therefore ran
 \texttt{mri\_TumorSynth} / nnU-Net~v1.7 on the same $n=50$ staged
@@ -1500,8 +1501,10 @@ processing code, the pinned software stack, the cohort-pinning
 manifests for the $n=50$ UCSF-PDGM evaluation cohort and for the
 six-timepoint LUMIERE Patient-048 longitudinal subject, and the
 producer scripts that generate every figure and table reported
-above end-to-end from the on-disk derivatives will be released at
-\url{https://github.com/arvidl/high-precision-glioma-segmentation}.
+above end-to-end from the on-disk derivatives are released at
+\url{https://github.com/arvidl/high-precision-glioma-segmentation}
+(tag \texttt{v1.0.0}). The published article is
+\url{https://doi.org/10.1080/03091902.2026.2713703}.
 The qualitative LUMIERE Patient-048 panel of
 Figure~\ref{fig:LUMIERE-Patient-048-hd-glio-synthseg} was produced
 manually in \texttt{Freeview} on FreeSurfer~7.4.1

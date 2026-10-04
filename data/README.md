@@ -62,9 +62,8 @@ data/ucsf_pdgm_cohort50/
   (Suter et al. 2022, *Sci Data* 9:768; DOI:
   <https://doi.org/10.1038/s41597-022-01881-7>).
   License: non-commercial use only.
-- Used for the Patient-048 longitudinal panels of the round-3 revision
-  (volume trajectories + Hit-Rate radial plot at baseline and at PD),
-  replacing the round-2 BGO-D panels.
+- Used for the Patient-048 longitudinal panels (volume trajectories and
+  the longitudinal Hit-Plot).
 
 After downloading the LUMIERE archive locally, stage Patient-048 with:
 

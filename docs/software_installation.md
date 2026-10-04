@@ -300,6 +300,11 @@ The timepoint list and day-axis source of truth is
 Run in stages. Each heavy cohort target has a skip-existing option so interrupted
 runs can be resumed.
 
+`hpgs-run-cohort` runs the segmentation, parcellation, and Hit-Plot stages below
+by calling the same scripts as `make segment-all`, `make parcellate-all`, and
+`make hitplot-all`. A real FreeSurfer parcellation needs `--fs-work-dir`.
+`--dry-run` only enumerates artefact paths.
+
 ### 1. Smoke tests
 
 On Apple Silicon:

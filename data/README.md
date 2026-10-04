@@ -106,5 +106,24 @@ same engine.
 
 ## Derivatives
 
-Pipeline outputs (parcellations, predicted masks, Hit-Plot tables) land under
-`data/derivatives/sub-XXXX/...`. Everything in `data/` is git-ignored.
+Pipeline outputs are not part of the download. They are written here and left
+untracked:
+
+- `data/derivatives_cohort50/sub-XXXX/` — n=50 segmentation, `wmparc`, metrics, and Hit-Plots
+- `data/derivatives_legacy5/` — parcellations and reference Hit-Plots for subjects 0020, 0022, 0039, 0066, and 0085
+- `data/freesurfer_subjects_legacy5/` — FreeSurfer subjects for those five exams
+- `data/lumiere_p048/derivatives/` — Patient-048 longitudinal summaries
+
+`data/README.md` and `data/UCSF-PDGM-metadata_v5.csv` are tracked. The imaging
+trees above are listed in `.gitignore`. `git add -f` would override that.
+
+TumorSynth masks for subjects 0005, 0012, 0018, 0026, and 0035, when present
+under `data/derivatives_cohort50/`, are the five-subject label-mapping audit.
+They are not a partial copy of Appendix 5. The n=50 Appendix 5 table and
+figures are already in `paper/figs/` (`table_tumorsynth_agreement.tex`,
+`fig_hitplot_agreement_dl_vs_tumorsynth.pdf`,
+`fig_functional_anatomy_hitplot_tumorsynth.pdf`). `make paper` uses those
+files and does not need the other 45 TumorSynth masks or TumorSynth Hit-Plots.
+Regenerating Appendix 5 from per-subject derivatives is the full n=50
+TumorSynth run in
+[`docs/tumorsynth_appendix5_reproducibility.md`](../docs/tumorsynth_appendix5_reproducibility.md).

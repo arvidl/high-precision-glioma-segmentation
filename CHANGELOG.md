@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Added
+- `notebooks/00_quickstart_single_subject.ipynb`: subject 0005, four MRI
+  channels, the MONAI BraTS segmenter, and enhancing-tumor Dice.
+
 ## [1.0.0] - 2026-10-04
 
 ### Added

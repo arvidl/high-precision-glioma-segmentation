@@ -129,6 +129,11 @@ make paper            # build paper/main.pdf from the committed sources
 `make paper` uses the figures already in `paper/figs/`. `make test` checks
 that the metric builders agree with the committed tables.
 
+One subject, after the cohort extract in [`data/README.md`](data/README.md):
+open [`notebooks/00_quickstart_single_subject.ipynb`](notebooks/00_quickstart_single_subject.ipynb).
+It loads subject 0005, runs the same segmenter as `make smoke-segment`, and
+prints Dice against the dataset reference.
+
 ### Regenerating figures and tables
 
 UCSF-PDGM v5 is the TCIA collection **UCSF-PDGM** (DOI

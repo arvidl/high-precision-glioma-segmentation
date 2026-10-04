@@ -1,0 +1,98 @@
+[project]
+name = "hpgs"
+version = "0.1.0"
+description = "High-precision glioma segmentation — multiparametric MRI + SynthSeg + fastMONAI + nnU-Net v2"
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+license = { text = "MIT" }
+authors = [
+    { name = "Alexander Selvikvåg Lundervold", email = "alexander.lundervold@hvl.no" },
+]
+keywords = ["glioma", "segmentation", "MRI", "neuroimaging", "deep learning", "BraTS"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+]
+
+dependencies = [
+    "numpy>=1.26,<2.3",
+    "scipy>=1.11",
+    "pandas>=2.1",
+    "pyyaml>=6.0",
+    "nibabel>=5.2",
+    "SimpleITK>=2.3",
+    "antspyx>=0.4.2",
+    "scikit-image>=0.22",
+    "scikit-learn>=1.4",
+    "matplotlib>=3.8",
+    "seaborn>=0.13",
+    "plotly>=5.18",
+    "torch>=2.3",
+    "monai>=1.4",
+    "fastmonai>=0.4",
+    # nnU-Net v2 installs torch; let pip resolve
+    "nnunetv2>=2.5",
+    "tqdm>=4.66",
+    "rich>=13.7",
+    "typer>=0.12",
+    "hydra-core>=1.3",
+    "omegaconf>=2.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.4.0",
+    "mypy>=1.10",
+    "pre-commit>=3.6",
+    "nbstripout>=0.7",
+    "jupyterlab>=4.1",
+    "ipywidgets>=8.1",
+]
+
+[project.urls]
+Homepage = "https://github.com/arvidl/high-precision-glioma-segmentation"
+Issues = "https://github.com/arvidl/high-precision-glioma-segmentation/issues"
+
+[project.scripts]
+hpgs-extract-ucsfpdgm = "hpgs.cli:extract_ucsfpdgm"
+hpgs-run-subject = "hpgs.cli:run_subject"
+hpgs-run-cohort = "hpgs.cli:run_cohort"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/hpgs"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests", "scripts"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "NPY", "PL", "RUF"]
+ignore = ["PLR0913", "PLR2004"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.mypy]
+python_version = "3.11"
+strict = false
+ignore_missing_imports = true
+packages = ["hpgs"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra -q --strict-markers"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "gpu: marks tests that require a GPU or MPS backend",
+]

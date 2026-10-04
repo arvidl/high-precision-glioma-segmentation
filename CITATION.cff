@@ -1,0 +1,65 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "high-precision-glioma-segmentation"
+abstract: >
+  Reproducible pipeline for high-precision segmentation of glioma and
+  surroundings using multiparametric MRI, FreeSurfer 8.2.0 SynthSeg/SynthSR,
+  fastMONAI, and nnU-Net v2, with regional tumor-burden (Hit-Plot)
+  visualisation.
+authors:
+  - family-names: "Lundervold"
+    given-names: "Arvid"
+    orcid: "https://orcid.org/0000-0002-0032-4182"
+  - family-names: "Alam"
+    given-names: "Saruar"
+    orcid: "https://orcid.org/0000-0002-3007-5180"
+  - family-names: "Hannisdal"
+    given-names: "Marianne H."
+    orcid: "https://orcid.org/0000-0002-6333-007X"
+  - family-names: "Goplen"
+    given-names: "Dorota"
+    orcid: "https://orcid.org/0009-0009-9373-4110"
+  - family-names: "Chekenya"
+    given-names: "Martha"
+    orcid: "https://orcid.org/0000-0001-7241-3451"
+  - family-names: "Lundervold"
+    given-names: "Alexander S."
+    orcid: "https://orcid.org/0000-0001-8663-4247"
+repository-code: "https://github.com/arvidl/high-precision-glioma-segmentation"
+license: MIT
+version: "0.1.0"
+date-released: "2026-04-15"
+keywords:
+  - glioma
+  - glioblastoma
+  - MRI
+  - deep-learning
+  - segmentation
+  - FreeSurfer
+  - SynthSeg
+  - fastMONAI
+  - nnU-Net
+preferred-citation:
+  type: article
+  title: "High precision segmentation of glioma and surroundings — a feasibility study using multiparametric MRI and deep learning"
+  authors:
+    - family-names: "Lundervold"
+      given-names: "Arvid"
+      orcid: "https://orcid.org/0000-0002-0032-4182"
+    - family-names: "Alam"
+      given-names: "Saruar"
+      orcid: "https://orcid.org/0000-0002-3007-5180"
+    - family-names: "Hannisdal"
+      given-names: "Marianne H."
+      orcid: "https://orcid.org/0000-0002-6333-007X"
+    - family-names: "Goplen"
+      given-names: "Dorota"
+      orcid: "https://orcid.org/0009-0009-9373-4110"
+    - family-names: "Chekenya"
+      given-names: "Martha"
+      orcid: "https://orcid.org/0000-0001-7241-3451"
+    - family-names: "Lundervold"
+      given-names: "Alexander S."
+      orcid: "https://orcid.org/0000-0001-8663-4247"
+  journal: "Journal of Medical Engineering & Technology"
+  year: 2026

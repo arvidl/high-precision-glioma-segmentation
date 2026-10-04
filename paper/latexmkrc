@@ -1,0 +1,11 @@
+# latexmkrc — local build config for the paper/ subdirectory
+$pdf_mode = 1;          # build PDF via pdflatex
+$bibtex_use = 2;        # always run bibtex when needed
+$pdflatex = 'pdflatex -interaction=nonstopmode -halt-on-error -file-line-error %O %S';
+@default_files = ('main.tex');
+
+# Figures live in figs/. references.bib and abbrv.bst sit next to main.tex;
+# refs/ still holds the BibTeX style files.
+$ENV{'TEXINPUTS'}  = './figs//:./refs//:' . ($ENV{'TEXINPUTS'} // '');
+$ENV{'BIBINPUTS'}  = '.:./refs//:'        . ($ENV{'BIBINPUTS'} // '');
+$ENV{'BSTINPUTS'}  = '.:./refs//:'        . ($ENV{'BSTINPUTS'} // '');

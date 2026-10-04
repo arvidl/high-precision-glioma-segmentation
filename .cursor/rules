@@ -1,0 +1,80 @@
+# Cursor rules for high-precision-glioma-segmentation (HPGS)
+
+## Project context
+- Academic neuroimaging pipeline for glioma segmentation and anatomical localisation.
+- Manuscript: Journal of Medical Engineering & Technology (2026).
+- Published PDF: `article/Lundervold_etal_High_Precision_Segmentation_of_Glioma_JMET_2026.pdf`.
+
+## Language, style, and tooling
+- Python 3.11 only.
+- Formatter: ruff (line-length 100, double quotes).
+- Lint: ruff (`select = E,F,W,I,B,UP,NPY,PL,RUF`). Fix on save.
+- Type hints everywhere in `src/hpgs`. Use `from __future__ import annotations`.
+- Docstrings: NumPy style.
+- Tests: pytest; keep under `tests/`; small synthetic arrays only (no real MRI).
+
+## Neuroimaging conventions
+- Image I/O: prefer `nibabel` for NIfTI, `SimpleITK` for filters, `ants` (ANTsPyX) for
+  registration. Avoid writing our own I/O.
+- Keep everything in **native subject space** where possible (avoid template warping
+  unless explicitly required). SynthSeg and SynthSR give parcellations / synthesised
+  contrasts in native space.
+- Orientation: respect the input affine; do not silently resample.
+- Units: voxel coordinates are `(i, j, k)` tuples; world coordinates are `(x, y, z)`
+  mm. Never mix.
+- Tumor label convention (BraTS-style, confirm per dataset):
+  `0 = background, 1 = NCR/necrotic, 2 = edema, 4 = enhancing`.
+  Whole tumor (WT) = {1, 2, 4}, Tumor core (TC) = {1, 4}, Enhancing tumor (ET) = {4}.
+
+## Hardware
+- Primary: Apple Silicon (M4 Max). Use `torch.backends.mps.is_available()` gating and
+  fall back to CPU for ops not supported on MPS.
+- Secondary: CUDA on HPC for full-cohort runs.
+- Never hard-code device; read from config.
+
+## Dependencies to prefer
+- `monai` + `fastmonai` for segmentation model plumbing.
+- `nnunetv2` for pre-trained BraTS-style tumor segmentation.
+- `antspyx` for registration.
+- FreeSurfer 8.2.0 is called as a subprocess; wrap commands in `hpgs.parcellate`.
+
+## Data-handling rules
+- **Never commit** NIfTI, DICOM, or any real patient data. `.gitignore` already blocks
+  `*.nii.gz`, `data/`, etc.
+- Do not upload to external services without explicit user confirmation.
+- Intermediate outputs go under `data/derivatives/sub-XXXX/...`.
+
+## Paper subfolder (`paper/`)
+- The author manuscript is `paper/main.tex`, with `paper/references.bib`. The published PDF is in `article/`.
+- Figures referenced by the paper live in `paper/figs/` and are mirrored from
+  `outputs/figures/` by `scripts/sync_figs_to_paper.py`. Never hand-edit a figure in
+  `paper/figs/` — fix the generating notebook/script under `notebooks/` or
+  `src/hpgs/viz`.
+- When adding a figure to the manuscript: (1) generate via code, (2) `make sync`,
+  (3) `\includegraphics{figs/<name>}`, (4) update `paper/figs/README.md` inventory.
+- New references go in `paper/references.bib`.
+- Do not commit TeX build artefacts (`.aux`, `.log`, `.bbl`, etc.) or `paper/main.pdf`.
+  The published article PDF in `article/` is the version of record. `make paper`
+  rebuilds the author manuscript.
+
+## LaTeX authoring conventions
+- **Local editor of record:** TeXShop (MacTeX) on macOS. Open `paper/main.tex`
+  and typeset with `pdflatex` + `bibtex`, or run `make paper` (`latexmk`).
+  Do not introduce features that require a different engine (no LuaLaTeX-only
+  packages, no biber-only `.bib` syntax) unless discussed first.
+- `paper/main.tex` is the author manuscript: ordinary text, the figures in
+  `paper/figs/`, and `paper/references.bib`. It compiles to a 49-page A4 PDF.
+  That PDF is not the journal house style. The version of record is
+  `article/Lundervold_etal_High_Precision_Segmentation_of_Glioma_JMET_2026.pdf`.
+
+## When generating code
+- Prefer small, composable functions with single responsibility.
+- Log with `logging` (module-level loggers); avoid prints in library code.
+- Config-driven: pull hyperparameters and paths from the Hydra/OmegaConf config
+  (`configs/default.yaml`). Never hard-code paths.
+- For reproducibility, honour the seed (`20260415`) in all stochastic code paths.
+
+## Commit / PR discipline
+- Conventional Commits style (`feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`).
+- One topic per PR.
+- Update `CHANGELOG.md` and bump version before tagging.

@@ -1,0 +1,11 @@
+\begingroup\small
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X l c >{\raggedright\arraybackslash}X}
+\toprule
+Stage & Backend & Device & $n$ & Wall-clock per subject (median [Q1, Q3]) \\
+\midrule
+DL segmentation (first-call latency) & MONAI Bundle 0.4.8 (BraTS-3 SegResNet) & MPS & 1 & 22.01\,s \\
+DL segmentation (steady-state) & MONAI Bundle 0.4.8 (BraTS-3 SegResNet) & MPS & 49 & 1.29\,s [1.28\,s, 1.35\,s] \\
+Anatomical parcellation & FreeSurfer 8.2.0 recon-all-clinical (wmparc) & CPU/10t & 50 & 35:25\,min [32:38\,min, 41:08\,min] \\
+\bottomrule
+\end{tabularx}
+\endgroup

@@ -1,0 +1,102 @@
+# Leak-safe stratified UCSF-PDGM cohort for the JMET revision.
+# Regenerate with: python scripts/draw_cohort.py --metadata UCSF-PDGM-metadata_v5.csv \
+#                                                 --tree UCSF-PDGM-v5-tree.txt \
+#                                                 --seed 20260415
+
+seed: 20260415
+n: 50
+
+filters:
+  diagnosis: "Glioblastoma, IDH-wildtype"
+  grade: 4
+  idh: wildtype
+  biopsy_prior_to_imaging: "No"
+  os_known: true
+  exclude_brats21_training: true
+
+stratification:
+  axes: [Sex, OS_tertile]
+  os_tertile_cuts_days: [213, 484]   # short<=213; mid (213,484]; long>484
+  allocation:
+    M-short: 10
+    M-mid:   10
+    M-long:  10
+    F-short: 7
+    F-mid:   7
+    F-long:  6
+
+summary:
+  sex: {M: 30, F: 20}
+  age:
+    median: 64
+    mean: 62.1
+    range: [29, 83]
+  mgmt:
+    positive: 34
+    negative: 15
+    indeterminate: 1
+  eor:
+    GTR: 31
+    STR: 13
+    biopsy: 6
+  vital_dead: {alive: 19, dead: 31}
+  os_days:
+    median: 320
+    range: [6, 1449]
+  os_bin: {short: 17, mid: 17, long: 16}
+  brats21:
+    unused: 40
+    Validation: 10
+    Training: 0
+
+subjects:
+  - "0005"
+  - "0012"
+  - "0018"
+  - "0019"
+  - "0026"
+  - "0035"
+  - "0047"
+  - "0064"
+  - "0068"
+  - "0071"
+  - "0076"
+  - "0082"
+  - "0113"
+  - "0122"
+  - "0123"
+  - "0129"
+  - "0141"
+  - "0142"
+  - "0145"
+  - "0153"
+  - "0155"
+  - "0161"
+  - "0165"
+  - "0166"
+  - "0176"
+  - "0182"
+  - "0204"
+  - "0210"
+  - "0229"
+  - "0270"
+  - "0279"
+  - "0306"
+  - "0314"
+  - "0356"
+  - "0388"
+  - "0389"
+  - "0392"
+  - "0396"
+  - "0399"
+  - "0401"
+  - "0402"
+  - "0409"
+  - "0420"
+  - "0431"
+  - "0457"
+  - "0461"
+  - "0463"
+  - "0494"
+  - "0505"
+  - "0519"

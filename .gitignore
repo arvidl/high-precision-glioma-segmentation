@@ -1,0 +1,155 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Environments
+.venv/
+venv/
+env/
+.python-version
+uv.lock
+
+# Jupyter
+.ipynb_checkpoints/
+notebooks/**/.ipynb_checkpoints/
+
+# Type / lint / cov
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary / scratch files
+tmp-*
+
+# Data (never commit)
+data/ucsf_pdgm_cohort50/
+data/ucsf_pdgm_cohort50_sensitivity/
+data/ucsf_pdgm_legacy5/
+data/lumiere/
+data/lumiere_p048/
+data/bgo/
+data/raw/
+data/interim/
+data/processed/
+data/derivatives/
+data/derivatives_legacy5/
+data/derivatives_cohort50/
+data/freesurfer_subjects_legacy5/
+data/freesurfer_subjects_cohort50/
+*.nii
+*.nii.gz
+*.mgz
+*.bvec
+*.bval
+
+# Model weights
+models/
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+
+# Logs / outputs
+logs/
+output/
+outputs/
+runs/
+wandb/
+mlruns/
+
+# FreeSurfer subjects
+subjects/
+SUBJECTS_DIR/
+
+# Local editorial correspondence (decision letter / referee reports; not for git)
+paper/editor_2026_03_22.txt
+paper/referee_1.txt
+paper/referee_2.txt
+
+# LaTeX build artefacts (paper/)
+paper/*.aux
+paper/*.bbl
+paper/*.bcf
+paper/*.blg
+paper/*.fdb_latexmk
+paper/*.fls
+paper/*.log
+paper/*.out
+paper/*.run.xml
+paper/*.synctex.gz
+paper/*.toc
+paper/*.lof
+paper/*.lot
+paper/*.nav
+paper/*.snm
+paper/*.vrb
+paper/main.pdf
+paper/response_to_reviewers.pdf
+paper/response_to_reviewer_1.pdf
+paper/response_to_reviewer_2.pdf
+paper/cover_letter.pdf
+paper/cover_letter_md.pdf
+# Submission bundles: generated binaries; rebuild from .tex (see README_FOR_ALEXANDER.md).
+# Recursive, so it also covers dated submission_YYYY-MM-DD/ snapshot folders and any
+# *.zip review/upload packages placed inside the bundle directory. Scoped to the bundle
+# so tracked source figures under paper/figs/*.pdf are not affected.
+paper/submission_bundle_*/**/*.pdf
+paper/submission_bundle_*/**/*.zip
+paper/submission_bundle_*.zip
+paper/main_diff.tex
+paper/main_diff.pdf
+# Archive (legacy revision-letter source kept for reference, but never built)
+paper/archive/*.aux
+paper/archive/*.bbl
+paper/archive/*.blg
+paper/archive/*.fdb_latexmk
+paper/archive/*.fls
+paper/archive/*.log
+paper/archive/*.out
+paper/archive/*.pdf
+paper/archive/*.synctex.gz
+
+# Code-generated figure outputs (mirrored into paper/figs/)
+outputs/
+
+# Future-work scaffolding (per paper/revision_tracker.md R2.5).
+# `scripts/build_table3_segmenter_agreement.py` (`make table3-segmenter-agreement`)
+# produces a four-column segmenter-agreement table whose output is mirrored
+# into paper/figs/ by `make sync`, but the current manuscript does not
+# reference it. Kept ignored to avoid carrying unused artefacts in the
+# repo; re-allow if/when the table is included in a future revision.
+paper/figs/table3_segmenter_agreement.*
+
+# Producer-side lobe-compartment heatmap mirrored into paper/figs/ by
+# `make sync`. The current manuscript does not reference this PDF
+# (the lobe summary in the Results section is rendered inline from
+# the per-subject Hit-Plot CSVs instead). Kept ignored to avoid
+# carrying an unused artefact in the repo; re-allow if/when a future
+# revision cites it directly.
+paper/figs/fig_lobe_compartment_heatmap_gt.pdf
+
+# Rebuildable production-delivery artifacts for JMET article 2713703.
+paper/production_delivery/JMET_2713703_editable_manuscript/generated/

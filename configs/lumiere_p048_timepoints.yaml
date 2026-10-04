@@ -1,0 +1,91 @@
+# Cohort manifest for the LUMIERE longitudinal illustrative case (Patient-048).
+#
+# This file is the single source of truth for the time axis and the RANO
+# response timeline used in the Patient-048 longitudinal panels of the
+# round-3 manuscript revision (volume trajectories + Hit-Rate radial plot
+# at baseline and at PD), replacing the BGO-D longitudinal panels of the
+# round-2 submission.
+#
+# Source dataset: LUMIERE (Suter et al. 2022, Sci Data 9:768).
+# Public URL:     https://github.com/ysuter/gbm-data-longitudinal
+# Citation DOI:   10.1038/s41597-022-01881-7
+# License:        non-commercial use only.
+#
+# Anonymisation note (verbatim from the LUMIERE README):
+#   "all timing information is provided relative to the first (pre-operative)
+#    MRI study date in weeks. The week was calculated by a floor division by 7
+#    starting with the time span in days."
+#
+# Consequence for the day-axis: post-baseline `days_since_baseline` values
+# below are computed as (week_label * 7) and therefore carry +/-3 days of
+# anonymisation uncertainty. The pre-operative (week-000-1) and immediate
+# post-operative (week-000-2) baseline scans are exceptions: their day
+# offsets (0 and 3) are taken from the LUMIERE archive's own Patient-048
+# README figure and have day-resolution.
+
+schema_version: "1.0"
+cohort_id: lumiere_p048
+patient_id: "048"
+
+source:
+  archive: LUMIERE
+  archive_url: https://github.com/ysuter/gbm-data-longitudinal
+  citation_doi: 10.1038/s41597-022-01881-7
+  license: non-commercial-use-only
+
+# Demographics, copied verbatim from LUMIERE-Demographics_Pathology.csv.
+demographics:
+  sex: F
+  age_at_surgery_years: 52
+  idh: WT          # IDH1 negative; sequencing required (LUMIERE label)
+  mgmt_qualitative: not methylated
+  mgmt_quantitative_pct: 0.00
+  survival_weeks: 58
+
+reference_timepoint: week-000-1
+
+time_axis:
+  unit: days_since_baseline
+  baseline: week-000-1
+  caption_disclosure: |
+    LUMIERE post-baseline timepoints are anonymised to weeks (Suter et al. 2022),
+    so days reported here for week-013 onward are computed as week*7 and carry
+    a +/-3-day uncertainty; the two baseline scans (week-000-1, week-000-2)
+    have day-resolution from the LUMIERE archive (0 and 3 days respectively).
+
+# Six timepoints, ordered chronologically. RANO and rationale columns are
+# verbatim from LUMIERE-ExpertRating-v202211.csv (Patient-048 rows).
+timepoints:
+  - name: week-000-1
+    days_since_baseline: 0
+    rano: Pre-Op
+    rano_rationale: ""
+  - name: week-000-2
+    days_since_baseline: 3
+    rano: Post-Op
+    rano_rationale: CRET
+  - name: week-013
+    days_since_baseline: 91
+    rano: SD
+    rano_rationale: ""
+  - name: week-023
+    days_since_baseline: 161
+    rano: CR
+    rano_rationale: ""
+  - name: week-045
+    days_since_baseline: 315
+    rano: PD
+    rano_rationale: "T2-Progr., new non-measurable L."
+  - name: week-049
+    days_since_baseline: 343
+    rano: PD
+    rano_rationale: "T2-Progr., target L.: 29mm x 21mm, 30mm x 17mm, 11mm x 10mm, 25mm x 10mm, 12mm x 12mm, new non-measurable L."
+
+# The four MR sequences staged by scripts/extract_lumiere_p048.py. We do
+# NOT include HD-GLIO-AUTO or DeepBraTumIA segmentations in this manifest:
+# tumour segmentation will be regenerated with the unified MONAI Bundle
+# BraTS SegResNet on the channel stacks, in keeping with the round-2
+# 'unified framework' commitment to evaluate every dataset with the same
+# engine. The legacy LUMIERE segmentations remain available via the
+# extractor's --include-legacy-seg flag for use as a comparator overlay.
+channels: [T1, CT1, T2, FLAIR]

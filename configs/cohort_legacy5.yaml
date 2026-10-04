@@ -1,0 +1,56 @@
+# Five UCSF-PDGM "detail" subjects used in the manuscript's per-subject
+# anatomical-profile figures (Figs. 4, 5, 12, 13, 14 of paper/main.tex).
+#
+# Per `data/UCSF-PDGM-metadata_v5.csv` ("BraTS21 Segmentation Cohort" column)
+# four of these five subjects (020, 039, 066, 085) were used to TRAIN the
+# BraTS21 segmentation challenge models, and the fifth (022) was used for
+# BraTS21 model selection. The unified DL engine in this work is BraTS21-
+# derived, so running DL inference on these subjects and reporting per-
+# subject DL-vs-GT metrics would punch a hole through the leak-safety
+# guarantee that the n=50 evaluation cohort (`configs/cohort_ucsfpdgm_n50.yaml`)
+# is built on. THE PIPELINE MUST NEVER RUN DL INFERENCE ON THESE SUBJECTS.
+#
+# This config is consumed only by:
+#   - scripts/compute_legacy5_hitplot_gt.py
+#       (GT-only Hit-Plot from the dataset-provided tumor segmentation,
+#        which is independent of the DL engine and therefore leak-free)
+#   - scripts/run_figure2_legacy5.py
+#   - scripts/render_figure2_panels.py
+#       (anatomical-modality + parcellation panels; no DL involved)
+#
+# For per-subject DL-vs-GT comparisons, see the supplementary panel built
+# from the leak-safe n=50 cohort by scripts/build_legacy5_dlvsgt_panel.py.
+
+leak_safety:
+  brats21_segmentation_training: true   # 4/5 subjects in BraTS21 Seg Training
+  brats21_segmentation_validation: true # 1/5 subjects in BraTS21 Seg Validation
+  may_run_dl_inference: false           # never; use n=50 cohort for DL evaluation
+
+paths:
+  data_root: ./data/ucsf_pdgm_legacy5
+  derivatives: ./data/derivatives_legacy5
+
+# Voxel crosshair coordinates pinned to the original NIfTI array frame
+# (typically LPS for UCSF-PDGM); preserved for parity with the manuscript
+# captions on Figs. 3, 5, 12, 13, 14.
+subjects:
+  - id: "0020"
+    coord: [159, 147, 95]
+    brats21_seg_cohort: "Training"
+    notes: "right frontal high-grade glioma; the showcase subject of Fig. 3."
+  - id: "0022"
+    coord: [96, 138, 88]
+    brats21_seg_cohort: "Validation"
+    notes: "left temporo-parietal lesion; companion to Fig. 3 in the main text."
+  - id: "0039"
+    coord: [167, 111, 45]
+    brats21_seg_cohort: "Training"
+    notes: "right cerebellar lesion; appendix figure."
+  - id: "0066"
+    coord: [119, 133, 32]
+    brats21_seg_cohort: "Training"
+    notes: "small left occipital lesion partly surrounded by CSF; appendix figure."
+  - id: "0085"
+    coord: [182, 129, 71]
+    brats21_seg_cohort: "Training"
+    notes: "right frontal lesion; appendix figure."

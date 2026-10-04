@@ -1,0 +1,38 @@
+# Default pipeline configuration.
+# Override on the command line: hpgs-run-subject --config configs/default.yaml ...
+
+seed: 20260415
+
+paths:
+  data_root: ./data/ucsf_pdgm_cohort50
+  derivatives: ./data/derivatives
+  freesurfer_subjects: ./data/freesurfer_subjects
+  models: ./models
+  outputs: ./outputs
+
+device:
+  prefer: mps          # one of: mps | cuda | cpu
+  fallback: cpu
+
+preprocess:
+  do_bias_correction: false  # UCSF-PDGM ships *_bias.nii.gz already
+  do_synth_sr: false         # enable when raw T1 quality is poor
+
+parcellate:
+  engine: synthseg           # synthseg | aparc_aseg
+  robust: true
+  parc: true
+  fast: false
+
+segment:
+  engine: nnunet_brats       # nnunet_brats | raidionics
+  channels: [T1_bias, T1c_bias, T2_bias, FLAIR_bias]
+
+hitplot:
+  reference_mask: brain_parenchyma_segmentation
+  tumor_subregion: WT        # WT | TC | ET
+  top_k: 20
+
+metrics:
+  subregions: [WT, TC, ET]
+  hd95_implementation: scipy   # scipy | sitk

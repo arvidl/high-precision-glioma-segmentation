@@ -1,0 +1,25 @@
+# Figure 2 regeneration — legacy five UCSF-PDGM subjects.
+# Voxel crosshair coordinates match the manuscript captions for each subject;
+# see paper/main.tex (fig:UCSF-PDGM-0020_a_h and related appendix figures).
+
+paths:
+  data_root: ./data/ucsf_pdgm_legacy5
+  derivatives: ./data/derivatives_legacy5
+  freesurfer_subjects: ./data/freesurfer_subjects_legacy5
+  figure_output: ./outputs/figures/figure2_legacy5
+
+# Prefix used for output PNG names; the subject id and "_panel_<letter>.png"
+# suffix are appended by scripts/render_figure2_panels.py.
+name_prefix: glioma-localization-figs-UCSF-PDGM-
+
+subjects:
+  - id: "0020"
+    coord: [159, 147, 95]
+  - id: "0022"
+    coord: [96, 138, 88]
+  - id: "0039"
+    coord: [167, 111, 45]
+  - id: "0066"
+    coord: [119, 133, 32]
+  - id: "0085"
+    coord: [182, 129, 71]

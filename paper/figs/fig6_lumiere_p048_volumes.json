@@ -1,0 +1,132 @@
+{
+  "caption_disclosure": "LUMIERE post-baseline timepoints are anonymised to weeks (Suter et al. 2022),\nso days reported here for week-013 onward are computed as week*7 and carry\na +/-3-day uncertainty; the two baseline scans (week-000-1, week-000-2)\nhave day-resolution from the LUMIERE archive (0 and 3 days respectively).",
+  "cohort_id": "lumiere_p048",
+  "figure_id": "fig6_lumiere_p048_volumes",
+  "inputs": {
+    "manifest_yaml": "/Users/arvid/GitHub/high-precision-glioma-segmentation/configs/lumiere_p048_timepoints.yaml",
+    "summary_csv": "/Users/arvid/GitHub/high-precision-glioma-segmentation/data/lumiere_p048/derivatives/segmentation_summary.csv"
+  },
+  "outputs": {
+    "pdf": "/Users/arvid/GitHub/high-precision-glioma-segmentation/outputs/figures/fig6_lumiere_p048_volumes.pdf",
+    "png": "/Users/arvid/GitHub/high-precision-glioma-segmentation/outputs/figures/fig6_lumiere_p048_volumes.png"
+  },
+  "patient_id": "048",
+  "ran_at_utc": "2026-04-20T17:45:12+00:00",
+  "schema_version": "1.0",
+  "summary": {
+    "day_axis": {
+      "max": 343.0,
+      "min": 0.0
+    },
+    "events": {
+      "postop_ET_drop_ml": 20.3,
+      "postop_WT_change_ml": -27.933,
+      "recurrence_ET_at_last_PD_ml": 22.705,
+      "recurrence_ET_last_PD_timepoint": "week-049",
+      "recurrence_ET_trough_ml": 0.719,
+      "recurrence_ET_trough_timepoint": "week-013"
+    },
+    "n_timepoints": 6,
+    "peaks": {
+      "ED": {
+        "days_since_baseline": 0.0,
+        "rano": "Pre-Op",
+        "timepoint": "week-000-1",
+        "value_ml": 105.961
+      },
+      "ET": {
+        "days_since_baseline": 0.0,
+        "rano": "Pre-Op",
+        "timepoint": "week-000-1",
+        "value_ml": 23.953
+      },
+      "NCR": {
+        "days_since_baseline": 3.0,
+        "rano": "Post-Op",
+        "timepoint": "week-000-2",
+        "value_ml": 40.588
+      },
+      "TC": {
+        "days_since_baseline": 3.0,
+        "rano": "Post-Op",
+        "timepoint": "week-000-2",
+        "value_ml": 44.241
+      },
+      "WT": {
+        "days_since_baseline": 0.0,
+        "rano": "Pre-Op",
+        "timepoint": "week-000-1",
+        "value_ml": 140.081
+      }
+    }
+  },
+  "table": [
+    {
+      "days_since_baseline": 0.0,
+      "rano": "Pre-Op",
+      "rano_rationale": "",
+      "timepoint": "week-000-1",
+      "vol_ED_ml": 105.961,
+      "vol_ET_ml": 23.953,
+      "vol_NCR_ml": 10.167,
+      "vol_TC_ml": 34.12,
+      "vol_WT_ml": 140.081
+    },
+    {
+      "days_since_baseline": 3.0,
+      "rano": "Post-Op",
+      "rano_rationale": "CRET",
+      "timepoint": "week-000-2",
+      "vol_ED_ml": 67.907,
+      "vol_ET_ml": 3.653,
+      "vol_NCR_ml": 40.588,
+      "vol_TC_ml": 44.241,
+      "vol_WT_ml": 112.148
+    },
+    {
+      "days_since_baseline": 91.0,
+      "rano": "SD",
+      "rano_rationale": "",
+      "timepoint": "week-013",
+      "vol_ED_ml": 13.555,
+      "vol_ET_ml": 0.719,
+      "vol_NCR_ml": 17.211,
+      "vol_TC_ml": 17.93,
+      "vol_WT_ml": 31.485
+    },
+    {
+      "days_since_baseline": 161.0,
+      "rano": "CR",
+      "rano_rationale": "",
+      "timepoint": "week-023",
+      "vol_ED_ml": 16.004,
+      "vol_ET_ml": 1.029,
+      "vol_NCR_ml": 15.187,
+      "vol_TC_ml": 16.216,
+      "vol_WT_ml": 32.22
+    },
+    {
+      "days_since_baseline": 315.0,
+      "rano": "PD",
+      "rano_rationale": "T2-Progr., new non-measurable L.",
+      "timepoint": "week-045",
+      "vol_ED_ml": 12.442,
+      "vol_ET_ml": 3.577,
+      "vol_NCR_ml": 11.627,
+      "vol_TC_ml": 15.204,
+      "vol_WT_ml": 27.646
+    },
+    {
+      "days_since_baseline": 343.0,
+      "rano": "PD",
+      "rano_rationale": "T2-Progr., target L.: 29mm x 21mm, 30mm x 17mm, 11mm x 10mm, 25mm x 10mm, 12mm x 12mm, new non-measurable L.",
+      "timepoint": "week-049",
+      "vol_ED_ml": 64.974,
+      "vol_ET_ml": 22.705,
+      "vol_NCR_ml": 12.275,
+      "vol_TC_ml": 34.98,
+      "vol_WT_ml": 99.954
+    }
+  ],
+  "title": "LUMIERE Patient-048 -- longitudinal tumour volumes (unified MONAI Bundle BraTS three-class SegResNet, n = 6 timepoints)"
+}

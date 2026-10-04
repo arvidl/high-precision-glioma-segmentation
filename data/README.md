@@ -99,11 +99,6 @@ unified MONAI Bundle BraTS SegResNet on the staged channel stacks, in
 keeping with the round-2 commitment to evaluate every dataset with the
 same engine.
 
-### BGO (local, not redistributed)
-
-- Single illustrative case from the local Bergen Glioma cohort.
-- Stage under `data/bgo/sub-XXXX/` with the same channel naming as UCSF-PDGM.
-
 ## Derivatives
 
 Pipeline outputs are not part of the download. They are written here and left
